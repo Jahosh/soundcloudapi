@@ -1,0 +1,38 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+
+artistsResults {
+  text-align: center;
+}
+
+#artistsResults {
+text-align: center;
+font-size: 1.3em;
+}
+
+.playhead {
+  height: 100px;
+}
+
+#searchButton {
+  margin-top: 10px;
+}
+
+.noArtist {
+  margin-top: 10px;
+}
+
+#users {
+  display: inline;
+  margin-top: 10px;
+  text-align: center;
+  list-style-type: none;
+  display: inline;
+}

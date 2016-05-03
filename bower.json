@@ -1,0 +1,22 @@
+{
+  "name": "32wav",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Jahosh <josh91hickman@gmail.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "soundcloud-audio": "^1.0.0"
+  }
+}
