@@ -22,9 +22,11 @@ var homeController = require('./controllers/home');
 */
 var app = express();
 
+
 /**
 * Connect to MongoDB.
 */
+/*
 mongoose.connect(process.env.MONGODB || 'mongodb://localhost:27017/sounds');
 mongoose.connection.on('open', function() {
   console.log('MongoDB successfully opened');
@@ -33,6 +35,8 @@ mongoose.connection.on('error', function() {
   console.log('MongoDB Connection Error. Please ensure MongoDB is running.');
   process.exit(1);
 });
+*/
+
 
 /**
 * Express configuration.
