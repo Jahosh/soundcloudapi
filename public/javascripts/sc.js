@@ -37,7 +37,7 @@ function findSongs() {
         return songs;
     }).
       then(function(songs) {
-        player(songs, nextSong, prevSong, randomCache);
+        player(songs, nextSong, randomCache);
         return songs;
     }).
       catch(function(error) {
@@ -54,20 +54,6 @@ function checkSongsLength (songs) {
     //return songs;
 };
 
-  //function to get previous song
-  function prevSong(songs, random) {
-    //console.log(randomCache);
-    console.log(songs);
-    $("#artistResults").html('');
-    $('#artistResults').append(songs[random].title);
-
-      lastSongIndex = songsArray.pop();
-      var track_url = songs[random].permalink_url;
-      SC.oEmbed(track_url, { auto_play: true }).then(function(song) {
-      document.getElementById('player').innerHTML= song.html;
-      })
-  };
-
   function createRandomArray(randomCache, random){
     //check to see if random is
     randomCache.push(random);
@@ -76,9 +62,11 @@ function checkSongsLength (songs) {
 
   //function to find another random song
   function nextSong(songs, prevSong) {
-  //Set a click event to happen on next icon
-    if ($("artistName").val('') === true){ alert('search for an artist first to use this'); return;}
-    //find another random song
+
+    if ($("artistName").val('') === true){
+      alert('search for an artist first to use this');
+      return;
+    };
     var random = Math.floor((Math.random() * songs.length) + 1);
     var track_url = songs[random].permalink_url;
       SC.oEmbed(track_url, { auto_play: true }).then(function(song) {
@@ -99,25 +87,27 @@ function checkSongsLength (songs) {
     $("#artistResults").html('');
     $('#artistResults').append(songs[random].title);
 
-
     var times = createRandomArray(randomCache, random);
     var clicked = 0;
 
     $("#prev").click(function() {
       clicked++;
-     prevSong(songs, random, times);
+     prevSong(songs, times);
     });
   };
 
-  function player(songs, nextSong, prevSongs, arr) {
+  function player(songs, nextSong, arr) {
     $("#next").click(function() {
-      nextSong(songs, function(times) {
+      nextSong(songs, function(songs, times) {
         console.log('callbacked');
         console.log(times);
         lastSongIndex = times[times.length - 2];
+        console.log(lastSongIndex);
         var track_url = songs[lastSongIndex].permalink_url;
         SC.oEmbed(track_url, { auto_play: true }).then(function(song) {
           document.getElementById('player').innerHTML = song.html;
+          $("#artistResults").html('');
+          $('#artistResults').append(songs[lastSongIndex].title);
         })
       });
     });
