@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-//Initialize soundcloud api
+//init sc api
 SC.initialize({
   client_id: '4eacd88faf146f5c09eb7bf3254cbb67'
 });
@@ -30,18 +30,13 @@ function findSongs() {
           document.getElementById('player').innerHTML= song.html;
             return songs;
         }).
-          then(function(songs) {
-            return songs
-        }).
           catch(function(error) {
             console.log(error);
             alert('Error: ' + error.message);
           });
-
         return songs;
     }).
       then(function(songs) {
-        console.log(songs.length);
         player(songs, nextSong, prevSong, randomCache);
         return songs;
     }).
@@ -51,28 +46,26 @@ function findSongs() {
       });
   };
 
-
 function checkSongsLength (songs) {
     if (songs.length === 0 ) {
       $('#artistResults').append('<div class="alert alert-danger noArtist" role="alert">No artist found for that name, please try again.</div>');
-      return songs;
+      return;
     }
-    return songs;
+    //return songs;
 };
 
   //function to get previous song
-  function prevSong(songs, randomCache) {
-    console.log(songs);
+  function prevSong(songs, random) {
     //console.log(randomCache);
+    console.log(songs);
+    $("#artistResults").html('');
+    $('#artistResults').append(songs[random].title);
 
-
-      /*
       lastSongIndex = songsArray.pop();
       var track_url = songs[random].permalink_url;
       SC.oEmbed(track_url, { auto_play: true }).then(function(song) {
       document.getElementById('player').innerHTML= song.html;
       })
-      */
   };
 
   function createRandomArray(randomCache, random){
@@ -109,24 +102,22 @@ function checkSongsLength (songs) {
 
     var times = createRandomArray(randomCache, random);
     var clicked = 0;
-    console.log(times);
+
     $("#prev").click(function() {
       clicked++;
-     prevSong(times);
+     prevSong(songs, random, times);
     });
   };
 
   function player(songs, nextSong, prevSongs, arr) {
     $("#next").click(function() {
-
       nextSong(songs, function(times) {
         console.log('callbacked');
         console.log(times);
-        lastSongIndex = times[times.length - 2];   //[times.length - 1];
-        console.log(lastSongIndex);
+        lastSongIndex = times[times.length - 2];
         var track_url = songs[lastSongIndex].permalink_url;
         SC.oEmbed(track_url, { auto_play: true }).then(function(song) {
-        document.getElementById('player').innerHTML= song.html;
+          document.getElementById('player').innerHTML = song.html;
         })
       });
     });
@@ -161,6 +152,5 @@ function checkSongsLength (songs) {
       return;
     }
     findSongs();
-
   });
 });

@@ -15,8 +15,7 @@ var errorhandler = require('errorhandler');
 * Controllers (route handlers).
 */
 var homeController = require('./controllers/home');
-var aboutController = require('./controllers/about');
-var contactController = require('./controllers/contact');
+
 
 /**
 * Create Express server.
@@ -52,14 +51,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 * App Routes.
 */
 app.get('/', homeController.index);
-app.get('/about', aboutController.index);
-app.get('/contact', contactController.index);
-
-/**
-* API routes
-*/
-
-
 
 /**
 * Error Handler.
